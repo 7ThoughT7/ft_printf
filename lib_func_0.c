@@ -58,6 +58,7 @@ t_flags	zero_flags(void)
 	fl.width = 0;
 	fl.pr_tion = -1;
 	fl.type = 0;
+	fl.len = 0;
 	return (fl);
 }
 

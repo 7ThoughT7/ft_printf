@@ -3,10 +3,20 @@
 int	fl_flag(t_flags *fl, const char *str, int count)
 {
 	if (str[count] == '0')
+	{
+		if (fl->flag == '-')
+		{
+			count++;
+			return (count);
+		}
 		fl->flag = '0';
+		count++;
+	}
 	if (str[count] == '-')
+	{
 		fl->flag = '-';
-	count++;
+		count++;
+	}
 	return (count);
 }
 
