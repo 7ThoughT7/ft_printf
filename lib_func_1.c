@@ -27,3 +27,20 @@ void	ft_putnbr_fd(int c, int fd)
 	if (ft_isdigit(i) == 1)
 		write(fd, &i, 1);
 }
+
+int	ft_putnbr_x(int c)
+{
+	int	i;
+
+	i = 0;
+	if (c < 0)
+		c *= -1;
+	while (c > 9)
+	{
+		ft_putnbr_x(c / 16);
+		c /= 16;
+		i++;
+	}
+	return (i);
+}
+

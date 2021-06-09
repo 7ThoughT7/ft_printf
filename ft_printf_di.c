@@ -42,7 +42,7 @@ int	ft_printf_di(t_flags fl, int num)
 	int		the_minus;
 	char	space;
 
-	len = ft_putnbr(num);
+	len = ft_putnbr(num, 10);
 	the_minus = 0;
 	if (len == 0 && fl.pr_tion == 0)
 	{
@@ -53,9 +53,9 @@ int	ft_printf_di(t_flags fl, int num)
 		the_minus = 1;
 	res = max(fl.width,max(fl.pr_tion + the_minus,len + the_minus));
 	space = ' ';
-	if (fl.zero == 1 && fl.pr_tion == 0)
+	if (fl.flag == '0' && fl.pr_tion == 0)
 		space = '0';
-	if (fl.minus == 1)
+	if (fl.flag == '-')
 		negativ_nbr(num, fl, len, space, the_minus);
 	else
 		pozitiv_nbr(num, fl, len, space, the_minus);
