@@ -49,11 +49,13 @@ int	ft_printf_di(t_flags fl, int num)
 		ft_putchar_fd(' ', fl.width);
 		return (fl.width);
 	}
+	if (fl.pr_tion == 0 && num == 0)
+		return (0);
 	if (num < 0)
 		the_minus = 1;
 	res = max(fl.width,max(fl.pr_tion + the_minus,len + the_minus));
 	space = ' ';
-	if (fl.flag == '0' && fl.pr_tion == 0)
+	if (fl.flag == '0' && fl.pr_tion == -1)
 		space = '0';
 	if (fl.flag == '-')
 		negativ_nbr(num, fl, len, space, the_minus);

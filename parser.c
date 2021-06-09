@@ -12,10 +12,22 @@ int	fl_flag(t_flags *fl, const char *str, int count)
 
 int	fl_width(t_flags *fl, const char *str, int count, va_list ap)
 {
+	int num;
+
 	if (ft_isdigit(str[count]))
 		fl->width = fl->width * 10 + (str[count] - '0');
 	if (str[count] == '*')
-		fl->width = va_arg(ap, int);
+	{
+		num = va_arg(ap, int);
+		if (num < 0)
+		{
+			fl->flag = '-';
+			num *= -1;
+			fl->width = num;
+		}
+		else
+			fl->width = num;
+	}
 	count++;
 	return (count);
 }
@@ -42,9 +54,12 @@ int	modifiers(t_flags *fl, const char *str, int count, va_list ap)
 	while (ft_isdigit(str[count]) || str[count] == '*')
 		count = fl_width(fl, str, count, ap);
 	if (str[count] == '.')
+	{
 		count++;
-	while (ft_isdigit(str[count]) || str[count] == '*')
-		count = fl_pr_tion(fl, str, count, ap);
+		fl->pr_tion = 0;
+		while (ft_isdigit(str[count]) || str[count] == '*')
+			count = fl_pr_tion(fl, str, count, ap);
+	}
 	while (ft_strchr(type, str[count]))
 	{
 		fl->type = (int)str[count];
