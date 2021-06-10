@@ -70,7 +70,7 @@ int	modifiers(t_flags *fl, const char *str, int count, va_list ap)
 		while (ft_isdigit(str[count]) || str[count] == '*')
 			count = fl_pr_tion(fl, str, count, ap);
 	}
-	while (ft_strchr(type, str[count]))
+	if (ft_strchr(type, str[count]))
 	{
 		fl->type = (int)str[count];
 		count++;
@@ -80,16 +80,15 @@ int	modifiers(t_flags *fl, const char *str, int count, va_list ap)
 
 int	parser(const char *str, t_flags *fl, va_list ap)
 {
-	int count;
-	int res;
+	int	count;
+	int	res;
 	int	num;
 
 	res = 0;
 	count = 0;
 	while (str[count] != '\0')
 	{
-		if (str[count] == '%' && str[count + 1] != '\0' &&
-			str[count + 1] != '%')
+		if (str[count] == '%' && str[count + 1] != '%')
 		{
 			count = modifiers(fl, str, count, ap);
 			num = va_arg(ap, int);

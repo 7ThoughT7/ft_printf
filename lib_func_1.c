@@ -13,7 +13,7 @@ void	ft_putnbr_fd(int c, int fd)
 
 	if (c == -2147483648)
 	{
-		write(fd, "-2147483648", 11);
+		write(fd, "2147483648", 10);
 		return ;
 	}
 	if (c < 0)
@@ -42,5 +42,19 @@ int	ft_putnbr_x(int c)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_putstr_fd(const char *c, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!c || fd < 0)
+		return ;
+	while (c[i])
+	{
+		ft_putchar_fd(c[i], fd);
+		i++;
+	}
 }
 
