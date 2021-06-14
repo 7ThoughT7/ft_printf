@@ -28,33 +28,41 @@ void	ft_putnbr_fd(int c, int fd)
 		write(fd, &i, 1);
 }
 
-int	ft_putnbr_x(int c)
+char	get_x_chr(unsigned int num, t_flags fl)
+{
+	if (num >= 0 && num <= 9)
+		return (num + '0');
+	num %= 10;
+	if (fl.type == 'X')
+		return (num + 'A');
+	else
+		return (num + 'a');
+}
+
+void	ft_putnbr_xfd(unsigned int c, t_flags fl)
+{
+	char	i;
+
+	if (c >= 16)
+		ft_putnbr_xfd(c / 16, fl);
+	i = get_x_chr(c % 16, fl);
+	ft_putchar_fd(i, 1);
+//	if (ft_isdigit(i) == 1)
+//		write(1, &i, 1);
+}
+
+int	ft_putnbr_x(unsigned int c, int baze)
 {
 	int	i;
 
 	i = 0;
-	if (c < 0)
-		c *= -1;
-	while (c > 9)
+	if (c == 0)
+		i++;
+	while (c > 0)
 	{
-		ft_putnbr_x(c / 16);
-		c /= 16;
+		ft_putnbr_x(c / baze, baze);
+		c /= baze;
 		i++;
 	}
 	return (i);
 }
-
-void	ft_putstr_fd(const char *c, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (!c || fd < 0)
-		return ;
-	while (c[i])
-	{
-		ft_putchar_fd(c[i], fd);
-		i++;
-	}
-}
-

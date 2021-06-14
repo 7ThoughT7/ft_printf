@@ -82,7 +82,6 @@ int	parser(const char *str, t_flags *fl, va_list ap)
 {
 	int	count;
 	int	res;
-	int	num;
 
 	res = 0;
 	count = 0;
@@ -91,8 +90,7 @@ int	parser(const char *str, t_flags *fl, va_list ap)
 		if (str[count] == '%' && str[count + 1] != '%')
 		{
 			count = modifiers(fl, str, count, ap);
-			num = va_arg(ap, int);
-			res += type_handling(*fl, num);
+			res += type_handling(*fl, ap);
 		}
 		else
 		{
