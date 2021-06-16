@@ -3,7 +3,6 @@
 int type_handling(t_flags fl, va_list ap)
 {
 	int				res;
-	unsigned int	num_x;
 	int				num;
 	char			*str;
 
@@ -15,13 +14,23 @@ int type_handling(t_flags fl, va_list ap)
 	}
 	if (fl.type == 'x' || fl.type == 'X')
 	{
-		num_x = (unsigned int)num;
-		res += ft_printf_x(fl, num_x);
+		num = va_arg(ap, unsigned int);
+		res += ft_printf_x(fl, num);
 	}
 	if (fl.type == 's')
 	{
 		str = va_arg(ap, char *);
 		res += ft_printf_sc(fl, str);
+	}
+	if (fl.type == 'u')
+	{
+		num = va_arg(ap, unsigned int);
+		res += ft_printf_u(fl, num);
+	}
+	if (fl.type == 'p')
+	{
+		num = va_arg(ap, unsigned int);
+		res += ft_printf_p(fl, num);
 	}
 	return (res);
 }

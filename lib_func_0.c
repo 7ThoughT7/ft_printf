@@ -1,15 +1,10 @@
 #include "ft_printf.h"
 
-int	ft_putnbr(int c, int baze)
+int	ft_putnbr(long long c, int baze)
 {
 	int	i;
 
 	i = 0;
-	if (c == -2147483648)
-	{
-		c = 147483648;
-		i++;
-	}
 	if (c < 0)
 		c *= -1;
 	if (c == 0)

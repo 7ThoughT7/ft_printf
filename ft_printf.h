@@ -16,12 +16,13 @@ typedef struct flags_arg
 
 //int		ft_isalpha(int c);
 int		ft_printf(const char *str, ...);
-int		ft_putnbr(int c, int baze);
+int		ft_putnbr(long long c, int baze);
 int		ft_putnbr_x(unsigned int c, int baze);
-void	ft_putnbr_fd(int c, int fd);
+void	ft_putnbr_fd(long long c, int fd);
 void	ft_putnbr_xfd(unsigned int c, t_flags fl);
 int		ft_isdigit(int c);
 int		max(int a, int b);
+int		min(int a, int b);
 int 	ft_strlen(char *c);
 void	ft_putchar_fd(char c, int n);
 void	ft_putstr_fd(const char *c, int fd);
@@ -31,6 +32,8 @@ int		parser(const char *str, t_flags *fl, va_list ap);
 int		ft_printf_di(t_flags fl, int num);
 int		ft_printf_x(t_flags fl, unsigned int num);
 int		ft_printf_sc(t_flags fl, char *str);
+int		ft_printf_u(t_flags fl, unsigned int num);
+int 	ft_printf_p(t_flags fl, unsigned int num);
 int		type_handling(t_flags fl, va_list ap);
 
 

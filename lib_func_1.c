@@ -7,7 +7,7 @@ int	max(int a, int b)
 	return (b);
 }
 
-void	ft_putnbr_fd(int c, int fd)
+void	ft_putnbr_fd(long long c, int fd)
 {
 	char	i;
 
@@ -47,8 +47,6 @@ void	ft_putnbr_xfd(unsigned int c, t_flags fl)
 		ft_putnbr_xfd(c / 16, fl);
 	i = get_x_chr(c % 16, fl);
 	ft_putchar_fd(i, 1);
-//	if (ft_isdigit(i) == 1)
-//		write(1, &i, 1);
 }
 
 int	ft_putnbr_x(unsigned int c, int baze)
