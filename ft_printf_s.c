@@ -1,12 +1,11 @@
 #include "ft_printf.h"
 
-int negativ_str(char *str, t_flags fl, char space)
+static int	negativ_str(char *str, t_flags fl, char space)
 {
 	if (fl.pr_tion >= 0 && fl.pr_tion < fl.len)
 	{
 		ft_putstr_fd(str, fl.pr_tion);
 		ft_putchar_fd(space, (fl.width - fl.pr_tion));
-
 	}
 	else
 	{
@@ -16,13 +15,12 @@ int negativ_str(char *str, t_flags fl, char space)
 	return (0);
 }
 
-int pozitiv_str(char *str, t_flags fl, char space)
+static int	pozitiv_str(char *str, t_flags fl, char space)
 {
 	if (fl.pr_tion >= 0 && fl.pr_tion < fl.len)
 	{
 		ft_putchar_fd(space, (fl.width - fl.pr_tion));
 		ft_putstr_fd(str, fl.pr_tion);
-
 	}
 	else
 	{
@@ -32,17 +30,17 @@ int pozitiv_str(char *str, t_flags fl, char space)
 	return (0);
 }
 
-int	result(t_flags fl)
+static int	result(t_flags fl)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	if (fl.width == 0)
 	{
 		if (fl.pr_tion <= -1)
-				res = fl.len;
+			res = fl.len;
 		else if (fl.pr_tion >= 0)
-				res = min(fl.pr_tion, fl.len);
+			res = min(fl.pr_tion, fl.len);
 	}
 	else if (fl.width > 0)
 	{
@@ -58,7 +56,7 @@ int	result(t_flags fl)
 
 int	ft_printf_s(t_flags fl, char *str)
 {
-	int 	res;
+	int		res;
 	char	space;
 
 	if (str == NULL)

@@ -11,11 +11,6 @@ void	ft_putnbr_fd(long long c, int fd)
 {
 	char	i;
 
-	if (c == -2147483648)
-	{
-		write(fd, "2147483648", 10);
-		return ;
-	}
 	if (c < 0)
 	{
 		write(fd, "-", 1);

@@ -1,63 +1,60 @@
 #include "ft_printf.h"
 
-long	num_long(t_flags fl, int num)
+static long	num_long(t_flags fl, int num)
 {
 	long	num_l;
 
-	num_l = num * -1;
+	num_l = num;
+	ft_putchar_fd('-', 1);
+	num_l *= -1;
+	return (num_l);
 }
 
-int negativ_nbr(int num, t_flags fl, char space, int minus)
+static int	negativ_nbr(int num, t_flags fl, char space, int minus)
 {
 	long	num_l;
 
 	num_l = num;
 	if (num < 0)
-	{
-		ft_putchar_fd('-', 1);
-		num_l *= -1;
-	}
+		num_l = num_long(fl, num);
 	if (fl.pr_tion > fl.len)
 		ft_putchar_fd('0', (fl.pr_tion - fl.len));
-	ft_putnbr_fd(num, 1);
+	ft_putnbr_fd(num_l, 1);
 	if (fl.width > max(fl.pr_tion, fl.len))
 		ft_putchar_fd(space, (fl.width - max(fl.pr_tion, fl.len) - minus));
 	return (0);
 }
 
-int pozitiv_nbr(int num, t_flags fl, char space, int minus)
+static int	pozitiv_nbr(int num, t_flags fl, char space, int minus)
 {
-	if (fl.pr_tion == -1)
+	long	num_l;
+
+	num_l = num;
+	if (fl.pr_tion <= -1)
 	{
 		if (num < 0 && space == '0')
-			ft_putchar_fd('-', 1);
+			num_l = num_long(fl, num);
 		if (fl.width > max(fl.pr_tion, fl.len))
-			ft_putchar_fd(space,fl.width - max(fl.pr_tion, fl.len) - minus);
+			ft_putchar_fd(space, fl.width - max(fl.pr_tion, fl.len) - minus);
 		if (num < 0 && space == ' ')
-		{
-			ft_putchar_fd('-', 1);
-			num *= -1;
-		}
+			num_l = num_long(fl, num);
 	}
 	if (fl.pr_tion >= 0)
 	{
 		if (fl.width > max(fl.pr_tion, fl.len))
-			ft_putchar_fd(space,fl.width - max(fl.pr_tion, fl.len) - minus);
+			ft_putchar_fd(space, fl.width - max(fl.pr_tion, fl.len) - minus);
 		if (num < 0)
-		{
-			ft_putchar_fd('-', 1);
-			num *= -1;
-		}
+			num_l = num_long(fl, num);
 	}
 	if (fl.pr_tion > fl.len)
 		ft_putchar_fd('0', fl.pr_tion - fl.len);
-	ft_putnbr_fd(num, 1);
+	ft_putnbr_fd(num_l, 1);
 	return (0);
 }
 
 int	ft_printf_di(t_flags fl, int num)
 {
-	int 	res;
+	int		res;
 	int		minus;
 	char	space;
 
@@ -70,9 +67,9 @@ int	ft_printf_di(t_flags fl, int num)
 	}
 	if (num < 0)
 		minus = 1;
-	res = max(fl.width,max(fl.pr_tion + minus,fl.len + minus));
+	res = max(fl.width, max(fl.pr_tion + minus, fl.len + minus));
 	space = ' ';
-	if (fl.flag == '0' && fl.pr_tion == -1)
+	if (fl.flag == '0' && fl.pr_tion <= -1)
 		space = '0';
 	if (fl.flag == '-')
 		negativ_nbr(num, fl, space, minus);

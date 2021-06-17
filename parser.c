@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	fl_flag(t_flags *fl, const char *str, int count)
+static int	fl_flag(t_flags *fl, const char *str, int count)
 {
 	if (str[count] == '0')
 	{
@@ -20,9 +20,9 @@ int	fl_flag(t_flags *fl, const char *str, int count)
 	return (count);
 }
 
-int	fl_width(t_flags *fl, const char *str, int count, va_list ap)
+static int	fl_width(t_flags *fl, const char *str, int count, va_list ap)
 {
-	int num;
+	int	num;
 
 	if (ft_isdigit(str[count]))
 		fl->width = fl->width * 10 + (str[count] - '0');
@@ -42,7 +42,7 @@ int	fl_width(t_flags *fl, const char *str, int count, va_list ap)
 	return (count);
 }
 
-int	fl_pr_tion(t_flags *fl, const char *str, int count, va_list ap)
+static int	fl_pr_tion(t_flags *fl, const char *str, int count, va_list ap)
 {
 	if (ft_isdigit(str[count]))
 		fl->pr_tion = fl->pr_tion * 10 + (str[count] - '0');
@@ -52,9 +52,9 @@ int	fl_pr_tion(t_flags *fl, const char *str, int count, va_list ap)
 	return (count);
 }
 
-int	modifiers(t_flags *fl, const char *str, int count, va_list ap)
+static int	modifiers(t_flags *fl, const char *str, int count, va_list ap)
 {
-	char *type;
+	char	*type;
 
 	type = "cspdiuxX%";
 	*fl = zero_flags();
@@ -70,7 +70,7 @@ int	modifiers(t_flags *fl, const char *str, int count, va_list ap)
 		while (ft_isdigit(str[count]) || str[count] == '*')
 			count = fl_pr_tion(fl, str, count, ap);
 	}
-	if (ft_strchr(type, str[count]))
+	if (str[count] && ft_strchr(type, str[count]))
 	{
 		fl->type = (int)str[count];
 		count++;

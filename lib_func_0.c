@@ -51,7 +51,7 @@ char	*ft_strchr(const char *s, int c)
 
 t_flags	zero_flags(void)
 {
-	t_flags fl;
+	t_flags	fl;
 
 	fl.flag = ' ';
 	fl.width = 0;
@@ -60,4 +60,3 @@ t_flags	zero_flags(void)
 	fl.len = 0;
 	return (fl);
 }
-

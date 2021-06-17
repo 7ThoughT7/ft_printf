@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int negativ_u(unsigned int num, t_flags fl, char space)
+static int	negativ_u(unsigned int num, t_flags fl, char space)
 {
 	if (fl.pr_tion > fl.len)
 		ft_putchar_fd('0', (fl.pr_tion - fl.len));
@@ -10,16 +10,16 @@ int negativ_u(unsigned int num, t_flags fl, char space)
 	return (0);
 }
 
-int pozitiv_u(unsigned int num, t_flags fl, char space)
+static int	pozitiv_u(unsigned int num, t_flags fl, char space)
 {
 	if (fl.pr_tion == -1)
 	{
 		if (fl.width > max(fl.pr_tion, fl.len))
-			ft_putchar_fd(space,fl.width - max(fl.pr_tion, fl.len));
+			ft_putchar_fd(space, fl.width - max(fl.pr_tion, fl.len));
 	}
 	if (fl.pr_tion >= 0)
 		if (fl.width > max(fl.pr_tion, fl.len))
-			ft_putchar_fd(space,fl.width - max(fl.pr_tion, fl.len));
+			ft_putchar_fd(space, fl.width - max(fl.pr_tion, fl.len));
 	if (fl.pr_tion > fl.len)
 		ft_putchar_fd('0', fl.pr_tion - fl.len);
 	ft_putnbr_fd(num, 1);
@@ -28,7 +28,7 @@ int pozitiv_u(unsigned int num, t_flags fl, char space)
 
 int	ft_printf_u(t_flags fl, unsigned int num)
 {
-	int 	res;
+	int		res;
 	char	space;
 
 	fl.len = ft_putnbr(num, 10);
@@ -37,7 +37,7 @@ int	ft_printf_u(t_flags fl, unsigned int num)
 		ft_putchar_fd(' ', fl.width);
 		return (fl.width);
 	}
-	res = max(fl.width,max(fl.pr_tion,fl.len));
+	res = max(fl.width, max(fl.pr_tion, fl.len));
 	space = ' ';
 	if (fl.flag == '0' && fl.pr_tion == -1)
 		space = '0';

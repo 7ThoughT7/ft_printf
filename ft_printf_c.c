@@ -2,8 +2,8 @@
 
 int	ft_printf_c(t_flags fl, char c)
 {
-	char space;
-	int res;
+	char	space;
+	int		res;
 
 	space = ' ';
 	res = max(fl.width, 1);
