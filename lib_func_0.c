@@ -11,7 +11,6 @@ int	ft_putnbr(long long c, int baze)
 		i++;
 	while (c > 0)
 	{
-		ft_putnbr(c / baze, baze);
 		c /= baze;
 		i++;
 	}

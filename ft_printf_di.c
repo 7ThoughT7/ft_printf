@@ -1,11 +1,21 @@
 #include "ft_printf.h"
 
+long	num_long(t_flags fl, int num)
+{
+	long	num_l;
+
+	num_l = num * -1;
+}
+
 int negativ_nbr(int num, t_flags fl, char space, int minus)
 {
+	long	num_l;
+
+	num_l = num;
 	if (num < 0)
 	{
 		ft_putchar_fd('-', 1);
-		num *= -1;
+		num_l *= -1;
 	}
 	if (fl.pr_tion > fl.len)
 		ft_putchar_fd('0', (fl.pr_tion - fl.len));
@@ -24,9 +34,10 @@ int pozitiv_nbr(int num, t_flags fl, char space, int minus)
 		if (fl.width > max(fl.pr_tion, fl.len))
 			ft_putchar_fd(space,fl.width - max(fl.pr_tion, fl.len) - minus);
 		if (num < 0 && space == ' ')
+		{
 			ft_putchar_fd('-', 1);
-		if (num < 0)
 			num *= -1;
+		}
 	}
 	if (fl.pr_tion >= 0)
 	{

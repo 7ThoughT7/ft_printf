@@ -28,7 +28,7 @@ void	ft_putnbr_fd(long long c, int fd)
 		write(fd, &i, 1);
 }
 
-char	get_x_chr(unsigned int num, t_flags fl)
+static int	get_x_chr(unsigned long num, t_flags fl)
 {
 	if (num >= 0 && num <= 9)
 		return (num + '0');
@@ -39,7 +39,7 @@ char	get_x_chr(unsigned int num, t_flags fl)
 		return (num + 'a');
 }
 
-void	ft_putnbr_xfd(unsigned int c, t_flags fl)
+void	ft_putnbr_xfd(unsigned long c, t_flags fl)
 {
 	char	i;
 
@@ -49,7 +49,7 @@ void	ft_putnbr_xfd(unsigned int c, t_flags fl)
 	ft_putchar_fd(i, 1);
 }
 
-int	ft_putnbr_x(unsigned int c, int baze)
+int	ft_putnbr_x(unsigned long c, int baze)
 {
 	int	i;
 
@@ -58,7 +58,6 @@ int	ft_putnbr_x(unsigned int c, int baze)
 		i++;
 	while (c > 0)
 	{
-		ft_putnbr_x(c / baze, baze);
 		c /= baze;
 		i++;
 	}

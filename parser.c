@@ -92,10 +92,15 @@ int	parser(const char *str, t_flags *fl, va_list ap)
 			count = modifiers(fl, str, count, ap);
 			res += type_handling(*fl, ap);
 		}
-		else
+		else if (str[count] == '%' && str[count + 1] == '%')
 		{
 			ft_putchar_fd(str[count], 1);
-			count++;
+			count += 2;
+			res++;
+		}
+		else
+		{
+			ft_putchar_fd(str[count++], 1);
 			res++;
 		}
 	}
