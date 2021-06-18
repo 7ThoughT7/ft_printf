@@ -8,7 +8,7 @@ OBJ			= $(LIST:.c=.o)
 
 FLAGS       = -Wall -Wextra -Werror
 
-.o:.c		$(HEADER)
+%.o:%.c		$(HEADER)
 		    gcc $(FLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME) :	$(OBJ) $(HEADER)

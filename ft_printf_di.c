@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static long	num_long(t_flags fl, int num)
+static long	num_long(int num)
 {
 	long	num_l;
 
@@ -16,7 +16,7 @@ static int	negativ_nbr(int num, t_flags fl, char space, int minus)
 
 	num_l = num;
 	if (num < 0)
-		num_l = num_long(fl, num);
+		num_l = num_long(num);
 	if (fl.pr_tion > fl.len)
 		ft_putchar_fd('0', (fl.pr_tion - fl.len));
 	ft_putnbr_fd(num_l, 1);
@@ -33,18 +33,18 @@ static int	pozitiv_nbr(int num, t_flags fl, char space, int minus)
 	if (fl.pr_tion <= -1)
 	{
 		if (num < 0 && space == '0')
-			num_l = num_long(fl, num);
+			num_l = num_long(num);
 		if (fl.width > max(fl.pr_tion, fl.len))
 			ft_putchar_fd(space, fl.width - max(fl.pr_tion, fl.len) - minus);
 		if (num < 0 && space == ' ')
-			num_l = num_long(fl, num);
+			num_l = num_long(num);
 	}
 	if (fl.pr_tion >= 0)
 	{
 		if (fl.width > max(fl.pr_tion, fl.len))
 			ft_putchar_fd(space, fl.width - max(fl.pr_tion, fl.len) - minus);
 		if (num < 0)
-			num_l = num_long(fl, num);
+			num_l = num_long(num);
 	}
 	if (fl.pr_tion > fl.len)
 		ft_putchar_fd('0', fl.pr_tion - fl.len);
